@@ -1,0 +1,8 @@
+{
+  "expo": {
+    "sdkVersion": "25.0.0",
+    "privacy": "public",
+    "icon": "./Forecast-Icon.png",
+    "description": "The Forecast app allows you to get the three-day forecast via a search on zipcode (using the Weather Underground API). When the app loads, the forecast for the user's current location is displayed."
+  }
+}
