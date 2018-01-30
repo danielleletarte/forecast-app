@@ -1,4 +1,6 @@
-<center><img src="./Forecast-Icon.png" width="250" height="250"/></center>
+<p align="center">
+  <img src="./Forecast-Icon.png" width="250" height="250"/>
+</p>
 
 <br>
 
