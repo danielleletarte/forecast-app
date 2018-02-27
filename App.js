@@ -17,6 +17,10 @@ class Home extends React.Component {
                 };
   }
 
+  static navigationOptions = {
+      title: 'Home',
+  };
+
   componentWillMount () {
     navigator.geolocation.getCurrentPosition(
     (position) => {
@@ -72,9 +76,9 @@ class Home extends React.Component {
         <View style={styles.weather}>
         <View>
           { this.state.error ?
-              <Text style={{padding: 10, fontSize: 25, textAlign: 'center'}}>{`${this.state.error}`}</Text>
+              <Text style={{padding: 5, fontSize: 25, textAlign: 'center'}}>{`${this.state.error}`}</Text>
             :
-              <Text style={{padding: 10, fontSize: 42, textAlign: 'center'}}>{`${this.state.city}\u00A0${this.state.state}`}</Text>
+              <Text style={{padding: 5, fontSize: 25, textAlign: 'center'}}>{`${this.state.city}\u00A0${this.state.state}`}</Text>
           }
         </View>
           <List containerStyle={{borderTopWidth: 0}}>
@@ -84,10 +88,9 @@ class Home extends React.Component {
              renderItem={({ item }) => (
                 <ListItem
                 roundAvatar
-                hideChevron
                 title={`${item.title}`}
                 subtitle={`${item.fcttext}`}
-                subtitleNumberOfLines={3}
+                subtitleNumberOfLines={1}
                 subtitleStyle={{fontSize: 9}}
                 avatar={{ uri: 'https' + item.icon_url.split('http')[1] }}
                 avatarStyle={{backgroundColor: 'white', borderRadius: 0}}
@@ -106,27 +109,6 @@ class Home extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: .9,
-      backgroundColor: 'white'
-  },
-  search: {
-    flex: .3,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  weather: {
-    flex: 1
-  },
-  input: {
-    height: 40,
-    borderBottomWidth: 1
-  }
-});
-
 class Details extends React.Component {
     render() {
 
@@ -137,16 +119,37 @@ class Details extends React.Component {
 
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
-                <Text>{title}</Text>
+                <Text style={{fontWeight: 'bold', fontSize: 40, padding: 30}}>{title}</Text>
                 <Image
                     style={{width: 50, height: 50}}
                     source={{uri: uri}}
                 />
-                <Text>{subtitle}</Text>
+                <Text style={{ padding: 30}}>{subtitle}</Text>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
+    search: {
+        flex: .2,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    weather: {
+        flex: 1
+    },
+    input: {
+        height: 40,
+        borderBottomWidth: 1
+    }
+});
 
 const RootStack = StackNavigator(
     {
