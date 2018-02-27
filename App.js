@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, FlatList } from 'react-native';
 import { List, ListItem, Button } from "react-native-elements";
+import { StackNavigator } from "react-navigation";
 
-export default class App extends React.Component {
+class Home extends React.Component {
 
   constructor(props) {
     super(props);
@@ -90,6 +91,11 @@ export default class App extends React.Component {
                 subtitleStyle={{fontSize: 9}}
                 avatar={{ uri: 'https' + item.icon_url.split('http')[1] }}
                 avatarStyle={{backgroundColor: 'white', borderRadius: 0}}
+                onPress={() => this.props.navigation.navigate('Details', {
+                    title: item.title,
+                    subtitle: item.fcttext,
+                    avatar: item.icon_url
+                })}
                 />
               )}
             />
@@ -103,6 +109,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: .9,
+      backgroundColor: 'white'
   },
   search: {
     flex: .3,
@@ -119,3 +126,44 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   }
 });
+
+class Details extends React.Component {
+    render() {
+
+        const { params } = this.props.navigation.state;
+        const title = params.title;
+        const subtitle = params.subtitle;
+        const uri = 'https' + params.avatar.split('http')[1]
+
+        return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'white'}}>
+                <Text>{title}</Text>
+                <Image
+                    style={{width: 50, height: 50}}
+                    source={{uri: uri}}
+                />
+                <Text>{subtitle}</Text>
+            </View>
+        );
+    }
+}
+
+const RootStack = StackNavigator(
+    {
+        Home: {
+            screen: Home,
+        },
+        Details: {
+            screen: Details,
+        },
+    },
+    {
+        initialRouteName: 'Home',
+    }
+    );
+
+export default class App extends React.Component {
+    render() {
+        return <RootStack/>;
+    }
+}
